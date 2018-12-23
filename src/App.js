@@ -3,6 +3,7 @@ import SpotifyLogin from 'react-spotify-login';
 import axios from 'axios'
 import MeInfo from './components/MeInfo'
 import {Banner,Spacing, Container, Spotiy, SpotiyDiv, Logout} from './app_css.js'
+require('dotenv').config();
 
 class App extends Component {
   constructor(){
@@ -89,8 +90,8 @@ class App extends Component {
               <p>I'm a react app that lets you<br/> interact with the Spotify Api</p>
             </div>
             <div>
-              <SpotifyLogin clientId={ID}
-                redirectUri={RE}
+              <SpotifyLogin clientId={process.env.REACT_APP_API_KEY}
+                redirectUri={process.env.REACT_APP_API_URL}
                 onSuccess={this.onSuccess}
                 onFailure={this.onFailure}
                 className="spotify"
