@@ -89,8 +89,8 @@ class App extends Component {
               <p>I'm a react app that lets you<br/> interact with the Spotify Api</p>
             </div>
             <div>
-              <SpotifyLogin clientId={process.env.clientId}
-                redirectUri={process.env.redirect}
+              <SpotifyLogin clientId={process.env.ID}
+                redirectUri={process.env.RE}
                 onSuccess={this.onSuccess}
                 onFailure={this.onFailure}
                 className="spotify"
