@@ -3,7 +3,6 @@ import SpotifyLogin from 'react-spotify-login';
 import axios from 'axios'
 import MeInfo from './components/MeInfo'
 import {Banner,Spacing, Container, Spotiy, SpotiyDiv, Logout} from './app_css.js'
-import {redirect, clientId} from './keys.js'
 
 class App extends Component {
   constructor(){
