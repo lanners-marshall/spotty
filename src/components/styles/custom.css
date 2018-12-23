@@ -1,0 +1,10 @@
+.tracks {
+}
+@media only screen and (max-width: 1000px){
+	.pic {
+	  width: 100%;
+	}
+	.tracks {
+		height: 400px;
+	}
+}

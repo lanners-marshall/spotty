@@ -1,25 +1,114 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import SpotifyLogin from 'react-spotify-login';
+import axios from 'axios'
+import MeInfo from './components/MeInfo'
+import {Banner,Spacing, Container, Spotiy, SpotiyDiv, Logout} from './app_css.js'
+import {redirect, clientId} from './keys.js'
 
 class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      accessToken: '',
+      meInfo: '',
+      playlists: '',
+    };
+  }
+
+  componentDidMount(){}
+
+  onSuccess = response => {
+    // console.log(response)
+    localStorage.setItem('token', response.access_token)
+    this.setState({
+      accessToken: localStorage.getItem('token')
+    })
+    this.getInfo() 
+    this.getPlayList()
+  }
+  onFailure = response => {
+    console.error(response)
+  }
+
+  logOut = () => {
+    localStorage.removeItem('token');
+    window.location.reload();
+  }
+
+  getInfo = () => {
+    let token = localStorage.getItem('token')
+    axios.get(
+      'https://api.spotify.com/v1/me',
+      {headers: {
+          "Authorization": 'Bearer ' + token
+        }
+      }
+    )
+    .then(response => {
+      // console.log(response)
+      this.setState({
+        meInfo: response.data
+      })
+    })
+    .catch(error => {
+      console.log(error.response)
+    })
+  }
+
+  getPlayList = () => {
+    let token = localStorage.getItem('token')
+    axios.get(
+      'https://api.spotify.com/v1/me/playlists',
+      {headers: {
+          "Authorization": 'Bearer ' + token
+        }
+      }
+    )
+    .then(response => {
+      // console.log(response.data.items)
+      this.setState({
+        playlists: response.data.items
+      })
+    })
+    .catch(error => {
+      console.log(error.response)
+    })
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <Banner/>
+        <Spacing/>
+        <Container>
+          <Spotiy>
+            Spotty
+          </Spotiy>
+          <SpotiyDiv>
+            <div>
+              <h1>Hi. This is Spotty</h1>
+              <p>I'm a react app that lets you<br/> interact with the Spotify Api</p>
+            </div>
+            <div>
+              <SpotifyLogin clientId={clientId}
+                redirectUri={redirect}
+                onSuccess={this.onSuccess}
+                onFailure={this.onFailure}
+                className="spotify"
+              />
+              <Logout onClick={this.logOut}>
+                Log Out
+              </Logout>
+            </div>
+          </SpotiyDiv>
+
+          {this.state.accessToken ? (
+            <MeInfo me={this.state.meInfo} playlists={this.state.playlists}/>
+            ) :
+            null
+          }
+          <Spacing/>
+        </Container>
       </div>
     );
   }
