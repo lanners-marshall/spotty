@@ -73,7 +73,7 @@ class MeInfo extends React.Component {
 					{this.state.track ? (
 						<iframe src={track} className="tracks" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 					) : <LoadTrack> 
-								<h3>Track</h3>
+								<h3>Play List</h3>
 							</LoadTrack> 
 					}
 					
