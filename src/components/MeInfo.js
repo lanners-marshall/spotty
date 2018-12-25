@@ -1,5 +1,5 @@
 import React from 'react';
-import {MeDiv, PlayLists, PersonalDiv, FlexDiv, Songs, TrackHolder, LoadTrack, ResFlex} from './styles/meInfo_css.js'
+import {MeDiv, PlayLists, PersonalDiv, FlexDiv, Songs, TrackHolder, ResFlex} from './styles/meInfo_css.js'
 import axios from 'axios';
 import './styles/custom.css'
 
@@ -41,11 +41,14 @@ class MeInfo extends React.Component {
 	}
 
 	render() {
-		let url, pic_url, total
+		let url, pic_url, total, play_url
 		if (this.props.me){
 			url = this.props.me.images[0].url
 			pic_url = this.props.me.external_urls.spotify
 			total = this.props.me.followers.total
+		}
+		if (this.props.playlists){
+			play_url = `https://open.spotify.com/embed/playlist/${this.props.playlists[0].id}`
 		}
 		let track = `https://open.spotify.com/embed/playlist/${this.state.track}`
 
@@ -71,10 +74,9 @@ class MeInfo extends React.Component {
 						</PlayLists>
 					</PersonalDiv>
 					{this.state.track ? (
-						<iframe src={track} className="tracks" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-					) : <LoadTrack> 
-								<h3>Play List</h3>
-							</LoadTrack> 
+						<iframe src={track} title="track" className="tracks" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+					) : 
+						<iframe src={play_url} title="track" className="tracks" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe> 
 					}
 					
 					<Songs>

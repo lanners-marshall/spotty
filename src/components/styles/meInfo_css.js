@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const MeDiv = styled.div`
 	margin-top: 30px;
-	padding-bottom: 100px;
+	padding-bottom: 30px;
 	border-radius: 8px;
 `
 
@@ -93,20 +93,6 @@ export const Songs = styled.div`
 		margin-top: 15px;
 	}
 `
-
-export const LoadTrack = styled.div`
-	background-color: white;
-	width: 100%;
-	border-radius: 8px;
-	@media (max-width: 1000px){
-		margin-bottom: 30px;
-	}
-	> h3 {
-		font-size: 3rem;
-    text-align: center;
-    margin: 10px 0;
-	}
-` 
 
 export const TrackHolder = styled.div`
   height: 460px;

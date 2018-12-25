@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import SpotifyLogin from 'react-spotify-login';
 import axios from 'axios'
 import MeInfo from './components/MeInfo'
+import Search from './components/Search'
 import {Banner,Spacing, Container, Spotiy, SpotiyDiv, Logout} from './app_css.js'
 require('dotenv').config();
+
 
 class App extends Component {
   constructor(){
@@ -103,10 +105,14 @@ class App extends Component {
           </SpotiyDiv>
 
           {this.state.accessToken ? (
-            <MeInfo me={this.state.meInfo} playlists={this.state.playlists}/>
+            <div>
+              <MeInfo me={this.state.meInfo} playlists={this.state.playlists}/>
+              <Search />
+            </div>
             ) :
             null
           }
+
           <Spacing/>
         </Container>
       </div>

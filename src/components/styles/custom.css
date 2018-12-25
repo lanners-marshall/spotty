@@ -1,5 +1,15 @@
-.tracks {
+.artist {
+	width: 100px;
+	height: 100px;
 }
+
+.song {
+	width: 93%;
+	height: 50px;
+	margin-bottom: 10px;
+}
+
+
 @media only screen and (max-width: 1000px){
 	.pic {
 	  width: 100%;

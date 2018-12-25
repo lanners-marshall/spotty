@@ -8,6 +8,7 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.1",
+    "react-select": "^2.1.2",
     "react-spotify-login": "^0.9.1",
     "styled-components": "^4.1.3"
   },

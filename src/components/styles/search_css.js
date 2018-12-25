@@ -1,0 +1,93 @@
+import styled from 'styled-components'
+
+export const SearchDiv = styled.div`
+  background-color: white;
+  height: 450px;
+  width: 30.5%;
+  padding: 2%;
+  border-radius: 8px;
+  font-size: 2rem;
+  > h2 {
+  	font-size: 3rem;
+  }
+  > form > input {
+  	font-size: 2rem;
+  	height: 30px;
+  	width: 100%;
+  	margin: 15px 0;
+  }
+  > p {
+  	margin-bottom: 15px;
+  }
+  > button {
+  	font-size: 2rem;
+    background-color: #10a0d5;
+    padding: 2%;
+    border-radius: 4px;
+    color: white;
+    margin: 15px 0;
+    &:hover {
+		  cursor: pointer;
+			background-color: #11ace5;
+    }
+  }
+`
+export const Flex = styled.div`
+	display: flex;
+`
+export const OverFlow = styled.div`
+	overflow: scroll;
+	width: 100%;
+	margin-left: 2%;
+	border-radius: 8px;
+	background-color: white;
+`
+export const DisplaySearch = styled.div`
+  padding: 2%;
+  height: 450px;
+`
+
+export const DisplayDiv = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	margin: 10px 0;
+`
+export const DisplayDivInner = styled.div`
+	border: solid black 1px;
+  padding: 1%;
+  background-color: grey;
+  background-color: #e7e7e7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  margin-right: 1.6%;
+	&:hover {
+		background-color: #f5f3f3;
+		cursor: pointer;
+	}
+  > p {
+  	font-size: 2rem;
+    white-space: pre-wrap;
+    width: 120px;
+    text-align: center;
+  }
+`
+
+export const SongDiv = styled.div`
+	padding: 2%
+`
+
+export const AddSpan = styled.span`
+	font-size: 4rem;
+  position: relative;
+  top: -21px;
+  left: 3.5%;
+  border: solid black 1px;
+`
+
+
+
+
