@@ -4,6 +4,7 @@ import axios from 'axios'
 import MeInfo from './components/MeInfo'
 import Search from './components/Search'
 import {Banner,Spacing, Container, Spotiy, SpotiyDiv, Logout} from './app_css.js'
+import Pagination from "react-js-pagination";
 require('dotenv').config();
 
 

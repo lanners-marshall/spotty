@@ -3,7 +3,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import './styles/custom.css'
 import no_pick from './images/noimage.jpeg'
-import {SearchDiv, DisplaySearch, Flex, OverFlow, DisplayDiv, DisplayDivInner, SongDiv, AddSpan} from './styles/search_css.js'
+import {SearchDiv, DisplaySearch, Flex, OverFlow, DisplayDiv, DisplayDivInner, SongDiv, AddSpan, Pagination} from './styles/search_css.js'
 
 const options = [
   { value: 'artist', label: 'artist' },
@@ -24,7 +24,9 @@ class Search extends React.Component {
 			tracks: '',
 			playlists: '',
 			artistsAlbums: '',
-			albumSongs: '',
+			albumSongs: [],
+      currentPage: 1,
+      SongsPerPage: 5,
 		};
 	}
 
@@ -87,7 +89,7 @@ class Search extends React.Component {
 					tracks: '',
 					playlists: '',
 					artistsAlbums: '',
-					albumSongs: ''
+					albumSongs: [],
     		})
 
     	}
@@ -172,9 +174,39 @@ class Search extends React.Component {
     })
   }
 
+  handlePage = event => {
+    this.setState({
+      currentPage: Number(event.target.id)
+    })
+  }
 
 	render() {
-		const { selectedOption } = this.state;
+		const { selectedOption, albumSongs, currentPage, SongsPerPage  } = this.state;
+    const idxLastSong = currentPage * SongsPerPage;
+    const idxFirstSong = idxLastSong - SongsPerPage;
+    const currentSongs = albumSongs.slice(idxFirstSong, idxLastSong);
+
+    const renderSongs = currentSongs.map((s, idx) => {
+      return <p id={s.id} key={s.id}><iframe src={`https://open.spotify.com/embed/track/${s.id}`} title="track" className="song" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe><AddSpan>+</AddSpan></p>
+    });
+
+    const pageNums = [];
+    for (let i = 1; i <= Math.ceil(albumSongs.length / SongsPerPage); i++){
+      pageNums.push(i)
+    }
+
+    const renderPageNums = pageNums.map(num => {
+      return (
+        <p
+          key={num}
+          id={num}
+          onClick={this.handlePage}
+        >
+          {num}
+        </p>
+      )
+    })
+
 		return (
 			<Flex>
 				<SearchDiv>
@@ -200,7 +232,6 @@ class Search extends React.Component {
 				<OverFlow>
 
 					<DisplaySearch>
-
 						{this.state.artists ? (
 							<DisplayDiv>
 								{this.state.artists.map(a => {
@@ -232,11 +263,10 @@ class Search extends React.Component {
 
 						{this.state.albumSongs? (
 							<SongDiv>
-							{this.state.albumSongs.map(s => {
-								return (
-									<p id={s.id} key={s.id}><iframe src={`https://open.spotify.com/embed/track/${s.id}`} title="track" className="song" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe><AddSpan>+</AddSpan></p>
-								)
-							})}
+                {renderSongs}
+                <Pagination>
+                {renderPageNums}
+                </Pagination>
 							</SongDiv>
 							) : 
 							null
@@ -250,15 +280,3 @@ class Search extends React.Component {
 }
 
 export default Search;
-
-
-
-
-						// <PlayLists>
-						// 	{this.props.playlists ?  (<h2>Play Lists</h2>) : null}
-						// 	{this.props.playlists ? (
-						// 		this.props.playlists.map(n => {
-						// 			return <p key={n.id} id={n.id} onClick={this.getSongs}>{n.name}</p>
-						// 		})
-						// 	) : null }
-						// </PlayLists>

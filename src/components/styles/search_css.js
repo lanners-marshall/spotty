@@ -73,6 +73,7 @@ export const DisplayDivInner = styled.div`
     white-space: pre-wrap;
     width: 120px;
     text-align: center;
+    overflow-wrap: break-word
   }
 `
 
@@ -86,6 +87,29 @@ export const AddSpan = styled.span`
   top: -21px;
   left: 3.5%;
   border: solid black 1px;
+  background-color: #10a0d5;
+  color: white;
+  &:hover {
+    cursor: pointer;
+    background-color: #11ace5;
+  }
+`
+
+export const Pagination = styled.div`
+  display: flex;
+  font-size: 2rem;
+  justify-content: space-evenly;
+  border: solid #e7e7e7 1px;
+  width: 70%;
+  margin: 0 auto;
+  > p {
+    width: 100%;
+    text-align: center;
+    &:hover {
+      cursor: pointer;
+      background-color: #e7e7e7;
+    }
+  }
 `
 
 
