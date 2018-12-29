@@ -7,11 +7,14 @@ export const MeDiv = styled.div`
 `
 
 export const PlayLists = styled.div`
+	display: flex;
+	flex-wrap: wrap;
 	> h2 {
 		font-size: 3rem;
 		margin-bottom: 15px;
 	}
 	> p {
+		margin-right: 1%;
     font-size: 2rem;
     background-color: #10a0d5;
     display: table;
@@ -49,7 +52,7 @@ export const PersonalDiv = styled.div`
 	background-color: white;
 	height: 500px;
 	margin-right: 2%;
-	width: 90%;
+	width: 50%;
 	@media (max-width: 1000px){
 		margin-bottom: 30px;
 		width: 96%
@@ -77,27 +80,10 @@ export const FlexDiv = styled.div`
 	}
 `
 
-export const Songs = styled.div`
-	border-radius: 8px;
-	background-color: white;
-	width: 100%;
-	overflow:scroll;
-	margin-left: 2%;
-	> h3 {
-    font-size: 3rem;
-    text-align: center;
-    margin: 10px 0;
-	}
+export const H2Center = styled.h2`
+	font-size: 3rem;
+	margin-bottom: 15px;
 	@media (max-width: 1000px){
-		margin: 0;
-		margin-top: 15px;
+		text-align: center
 	}
-`
-
-export const TrackHolder = styled.div`
-  height: 460px;
-  padding: 2%;
-  > p {
-  	font-size: 1.6rem;
-  }
 `

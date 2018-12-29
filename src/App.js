@@ -4,9 +4,8 @@ import axios from 'axios'
 import MeInfo from './components/MeInfo'
 import Search from './components/Search'
 import {Banner,Spacing, Container, Spotiy, SpotiyDiv, Logout} from './app_css.js'
-import Pagination from "react-js-pagination";
-require('dotenv').config();
 
+require('dotenv').config();
 
 class App extends Component {
   constructor(){
@@ -78,6 +77,14 @@ class App extends Component {
     })
   }
 
+  upDatePlayLists = (id, name) => {
+    let obj = {name: name, id: id}
+    this.setState({
+      playlists: [obj, ...this.state.playlists]
+    })
+    this.forceUpdate()
+  }
+
   render() {
     return (
       <div>
@@ -90,7 +97,7 @@ class App extends Component {
           <SpotiyDiv>
             <div>
               <h1>Hi. This is Spotty</h1>
-              <p>I'm a react app that lets you<br/> interact with the Spotify Api</p>
+              <p>I'm a react app that helps you look up music, play, and build new playlists on Spotify</p>
             </div>
             <div>
               <SpotifyLogin clientId={process.env.REACT_APP_API_KEY}
@@ -98,6 +105,7 @@ class App extends Component {
                 onSuccess={this.onSuccess}
                 onFailure={this.onFailure}
                 className="spotify"
+                scope="playlist-modify-public"
               />
               <Logout onClick={this.logOut}>
                 Log Out
@@ -108,7 +116,7 @@ class App extends Component {
           {this.state.accessToken ? (
             <div>
               <MeInfo me={this.state.meInfo} playlists={this.state.playlists}/>
-              <Search />
+              <Search update={this.upDatePlayLists}/>
             </div>
             ) :
             null

@@ -1,5 +1,5 @@
 import React from 'react';
-import {MeDiv, PlayLists, PersonalDiv, FlexDiv, Songs, TrackHolder, ResFlex} from './styles/meInfo_css.js'
+import {MeDiv, PlayLists, PersonalDiv, FlexDiv, ResFlex, H2Center} from './styles/meInfo_css.js'
 import axios from 'axios';
 import './styles/custom.css'
 
@@ -8,7 +8,7 @@ class MeInfo extends React.Component {
 		super();
 		this.state = {
 			songs: [],
-			track: ''
+			track: '',
 		};
 	}
 
@@ -61,11 +61,12 @@ class MeInfo extends React.Component {
 							<h2>
 								Country - {this.props.me.country}<br/>
 								{this.props.me.display_name}<br />
-								followers - {total}
+								followers - {total}<br /><br />
+								
 							</h2>
 						</ResFlex>
+						<H2Center>PlayLists:</H2Center>
 						<PlayLists>
-							{this.props.playlists ?  (<h2>Play Lists</h2>) : null}
 							{this.props.playlists ? (
 								this.props.playlists.map(n => {
 									return <p key={n.id} id={n.id} onClick={this.getSongs}>{n.name}</p>
@@ -79,14 +80,7 @@ class MeInfo extends React.Component {
 						<iframe src={play_url} title="track" className="tracks" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe> 
 					}
 					
-					<Songs>
-						<h3>Songs</h3>
-						<TrackHolder>
-							{this.state.songs.map(t => {
-								return <p key={t.id} id={t.id}>{t.track.name}</p>
-							})}
-						</TrackHolder>
-					</Songs>
+					
 				</FlexDiv>
 			</MeDiv>
 		)

@@ -7,6 +7,11 @@ export const SearchDiv = styled.div`
   padding: 2%;
   border-radius: 8px;
   font-size: 2rem;
+  @media (max-width: 1000px){
+    width: 96%;
+    margin-bottom: 30px;
+    height: 260px;
+  }
   > h2 {
   	font-size: 3rem;
   }
@@ -34,6 +39,9 @@ export const SearchDiv = styled.div`
 `
 export const Flex = styled.div`
 	display: flex;
+  @media (max-width: 1000px){
+    flex-direction: column;
+  }
 `
 export const OverFlow = styled.div`
 	overflow: scroll;
@@ -41,19 +49,28 @@ export const OverFlow = styled.div`
 	margin-left: 2%;
 	border-radius: 8px;
 	background-color: white;
+  @media (max-width: 1000px){
+    margin-left: 0;
+    
+  }
 `
 export const DisplaySearch = styled.div`
   padding: 2%;
   height: 450px;
+  margin-left: 5%;
+  @media (max-width: 1000px){
+    height: 260px;
+    margin: 0;
+  }
 `
 
 export const DisplayDiv = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	margin: 10px 0;
+  justify-content: center;
 `
 export const DisplayDivInner = styled.div`
-	border: solid black 1px;
   padding: 1%;
   background-color: grey;
   background-color: #e7e7e7;
@@ -99,7 +116,6 @@ export const Pagination = styled.div`
   display: flex;
   font-size: 2rem;
   justify-content: space-evenly;
-  border: solid #e7e7e7 1px;
   width: 70%;
   margin: 0 auto;
   > p {
@@ -109,6 +125,15 @@ export const Pagination = styled.div`
       cursor: pointer;
       background-color: #e7e7e7;
     }
+  }
+`
+
+export const H2Result = styled.h2`
+  text-align: center;
+  font-size: 3rem;
+  margin-top: 5px;
+  @media (max-width: 1000px){
+    text-align: center;
   }
 `
 

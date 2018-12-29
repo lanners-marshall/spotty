@@ -1,17 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 import Select from 'react-select';
-import './styles/custom.css'
-import no_pick from './images/noimage.jpeg'
-import {SearchDiv, DisplaySearch, Flex, OverFlow, DisplayDiv, DisplayDivInner, SongDiv, AddSpan, Pagination} from './styles/search_css.js'
+import './styles/custom.css';
+import no_pick from './images/noimage.jpeg';
+import BuildTrack from './BuildTrack';
+import {SearchDiv, DisplaySearch, Flex, OverFlow, DisplayDiv, DisplayDivInner, SongDiv, AddSpan, Pagination, H2Result} from './styles/search_css.js'
 
 const options = [
   { value: 'artist', label: 'artist' },
   { value: 'album', label: 'album' },
   { value: 'track', label: 'track' },
-  { value: 'playlist', label: 'playlist' }
 ];
-
 
 class Search extends React.Component {
 	constructor(){
@@ -21,16 +20,44 @@ class Search extends React.Component {
 			option: '',
 			artists: '',
 			albums: '',
-			tracks: '',
 			playlists: '',
 			artistsAlbums: '',
 			albumSongs: [],
       currentPage: 1,
       SongsPerPage: 5,
+      buildTrack: [],
 		};
 	}
 
 	componentDidMount(){}
+
+  buildTrack = (id, name) => {
+    let obj = {id: id, name: name}
+    console.log(obj)
+    this.setState({
+      buildTrack: [...this.state.buildTrack, obj]
+    })
+  }
+
+  clearTracks = () => {
+    this.setState({
+      buildTrack: []
+    })
+    this.forceUpdate()
+  }
+
+  removeSong = (event) => {
+    let newState = this.state.buildTrack;
+    let ar = []
+    newState.map(s => {
+      if (event.target.id !== s.id){
+        ar.push(s)
+      } 
+    })
+    this.setState({
+      buildTrack: ar
+    })
+  }
 
 	handleChange = event => {
  	  this.setState({[event.target.name]: event.target.value})
@@ -91,8 +118,49 @@ class Search extends React.Component {
 					artistsAlbums: '',
 					albumSongs: [],
     		})
-
     	}
+
+      if (response.data.albums) {
+        let ar = []
+        let obj, img
+        let items = response.data.albums.items
+        for (let i in items){
+          if (items[i].images.length > 0){
+            img = items[i].images[0].url
+          } else {
+            img = no_pick
+          }
+          obj = {name: items[i].name, image: img, id: items[i].id}
+          ar.push(obj)
+        }
+        // console.log(ar)
+        this.setState({
+          artists: '',
+          text: '',
+          albums: ar,
+          tracks: '',
+          playlists: '',
+          artistsAlbums: '',
+          albumSongs: [],
+        })
+      }
+
+      if (response.data.tracks) {
+        let ar = []
+        let obj
+        let items = response.data.tracks.items
+        for (let i in items){
+          obj = {name: items[i].name, id: items[i].id}
+          ar.push(obj)
+        }
+        // console.log(ar)
+        this.setState({
+          artistsAlbums: '',
+          albumSongs: ar,
+          albums: '',
+        })
+
+      }
 
     })
     .catch(error => {
@@ -136,6 +204,7 @@ class Search extends React.Component {
     	this.setState({
     		artists: '',
     		artistsAlbums: ar,
+        albums: '',
     	})
     })
     .catch(error => {
@@ -166,7 +235,8 @@ class Search extends React.Component {
     	console.log(ar)
     	this.setState({
     		artistsAlbums: '',
-    		albumSongs: ar
+    		albumSongs: ar,
+        albums: '',
     	})
     })
     .catch(error => {
@@ -187,7 +257,7 @@ class Search extends React.Component {
     const currentSongs = albumSongs.slice(idxFirstSong, idxLastSong);
 
     const renderSongs = currentSongs.map((s, idx) => {
-      return <p id={s.id} key={s.id}><iframe src={`https://open.spotify.com/embed/track/${s.id}`} title="track" className="song" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe><AddSpan>+</AddSpan></p>
+      return <p id={s.id} key={s.id}><iframe src={`https://open.spotify.com/embed/track/${s.id}`} title="track" className="song" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe><AddSpan onClick={() => {this.buildTrack(s.id,s.name)}}>+</AddSpan></p>
     });
 
     const pageNums = [];
@@ -208,73 +278,93 @@ class Search extends React.Component {
     })
 
 		return (
-			<Flex>
-				<SearchDiv>
-					<h2>Look Up Music</h2>
-					<form>
-						<input
-							type="text"
-							placeholder='Search'
-							onChange={this.handleChange}
-							name="text"
-							value={this.state.text}
-						/>
-					</form>
-					<p>Search by</p>
-					<Select
-		        value={selectedOption}
-		        onChange={this.handleChange2}
-		        options={options}
-		        className="select"
-		      />
-		      <button onClick={this.lookUp}>Submit</button>
-				</SearchDiv>
-				<OverFlow>
+      <div>
+  			<Flex>
+  				<SearchDiv>
+  					<h2>Look Up Music</h2>
+  					<form>
+  						<input
+  							type="text"
+  							placeholder='Search'
+  							onChange={this.handleChange}
+  							name="text"
+  							value={this.state.text}
+  						/>
+  					</form>
+  					<p>Search by</p>
+  					<Select
+  		        value={selectedOption}
+  		        onChange={this.handleChange2}
+  		        options={options}
+  		        className="select"
+  		      />
+  		      <button onClick={this.lookUp}>Submit</button>
+  				</SearchDiv>
+  				<OverFlow>
 
-					<DisplaySearch>
-						{this.state.artists ? (
-							<DisplayDiv>
-								{this.state.artists.map(a => {
-									return (
-										<DisplayDivInner onClick={this.artistsAlbums} key={a.id} id={a.id}>
-											<p key={a.id} id={a.id}>{a.name}</p>
-											<img src={a.image} id={a.id} alt='artist' className="artist"/>
-										</DisplayDivInner>
-									)
-								})}
-							</DisplayDiv>
-							) : null
-						}
+  					<DisplaySearch>
+              <H2Result>Search Results</H2Result>
 
-						{this.state.artistsAlbums? (
-							<DisplayDiv>
-							{this.state.artistsAlbums.map(a => {
-								return (
-									<DisplayDivInner onClick={this.getAlbumTracks} key={a.id} id={a.id}>
-										<p key={a.id} id={a.id}>{a.name}</p>
-										<img src={a.image} id={a.id} alt='artist' className="artist"/>
-									</DisplayDivInner>
-								)
-							})}
-							</DisplayDiv>
-						) :
-							null
-						}
+  						{this.state.artists ? (
+  							<DisplayDiv>
+  								{this.state.artists.map(a => {
+  									return (
+  										<DisplayDivInner onClick={this.artistsAlbums} key={a.id} id={a.id}>
+  											<p key={a.id} id={a.id}>{a.name}</p>
+  											<img src={a.image} id={a.id} alt='artist' className="artist"/>
+  										</DisplayDivInner>
+  									)
+  								})}
+  							</DisplayDiv>
+  							) : null
+  						}
 
-						{this.state.albumSongs? (
-							<SongDiv>
-                {renderSongs}
-                <Pagination>
-                {renderPageNums}
-                </Pagination>
-							</SongDiv>
-							) : 
-							null
-						}
+              {this.state.albums? (
+                <DisplayDiv>
+                {this.state.albums.map(a => {
+                  return (
+                    <DisplayDivInner onClick={this.getAlbumTracks} key={a.id} id={a.id}>
+                      <p key={a.id} id={a.id}>{a.name}</p>
+                      <img src={a.image} id={a.id} alt='artist' className="artist"/>
+                    </DisplayDivInner>
+                  )
+                })}
+                </DisplayDiv>
+              ) :
+                null
+              }
 
-					</DisplaySearch>
-				</OverFlow>
-			</Flex>
+  						{this.state.artistsAlbums? (
+  							<DisplayDiv>
+  							{this.state.artistsAlbums.map(a => {
+  								return (
+  									<DisplayDivInner onClick={this.getAlbumTracks} key={a.id} id={a.id}>
+  										<p key={a.id} id={a.id}>{a.name}</p>
+  										<img src={a.image} id={a.id} alt='artist' className="artist"/>
+  									</DisplayDivInner>
+  								)
+  							})}
+  							</DisplayDiv>
+  						) :
+  							null
+  						}
+
+  						{this.state.albumSongs? (
+  							<SongDiv>
+                  {renderSongs}
+                  <Pagination>
+                  {renderPageNums}
+                  </Pagination>
+  							</SongDiv>
+  							) : 
+  							null
+  						}
+
+  					</DisplaySearch>
+  				</OverFlow>
+  			</Flex>
+        <BuildTrack tracks={this.state.buildTrack} clearTracks={this.clearTracks} remove={this.removeSong} update={this.props.update} />
+      </div>
 		)
 	}
 }

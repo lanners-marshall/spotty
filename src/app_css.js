@@ -9,10 +9,11 @@ export const Banner = styled.div`
 	position: fixed;
 	top: 0;
 	width: 100%;
+	z-index: 1;
 `
 export const Container = styled.div`
 	width: 94%;
-	max-width: 1180px;
+	max-width: 880px;
 	margin: 0 auto;
 `
 
