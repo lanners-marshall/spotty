@@ -97,7 +97,7 @@ class App extends Component {
           <SpotiyDiv>
             <div>
               <h1>Hi. This is Spotty</h1>
-              <p>I'm a react app that helps you look up music, play, and build new playlists on Spotify</p>
+              <p>Look up music, play, & build playlists for Spotify</p>
             </div>
             <div>
               <SpotifyLogin clientId={process.env.REACT_APP_API_KEY}
@@ -106,6 +106,7 @@ class App extends Component {
                 onFailure={this.onFailure}
                 className="spotify"
                 scope="playlist-modify-public"
+                buttonText='Sign In to Spotify'
               />
               <Logout onClick={this.logOut}>
                 Log Out

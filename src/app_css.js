@@ -49,7 +49,7 @@ export const SpotiyDiv = styled.div`
 		}
 	}
 	> div > p {
-		font-size: 3rem;
+		font-size: 2rem;
 		color: #999999;
 		@media (max-width: 1000px){
 			text-align: center;
