@@ -3,6 +3,8 @@ import SpotifyLogin from 'react-spotify-login';
 import axios from 'axios'
 import MeInfo from './components/MeInfo'
 import Search from './components/Search'
+import github from './components/images/github.png'
+import './components/styles/custom.css'
 import {Banner,Spacing, Container, Spotiy, SpotiyDiv, Logout} from './app_css.js'
 
 require('dotenv').config();
@@ -88,7 +90,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Banner/>
+        <Banner>
+          <a href="https://github.com/lanners-marshall/spotty"><img src={github} alt="github" className='github'/></a>
+        </Banner>
         <Spacing/>
         <Container>
           <Spotiy>

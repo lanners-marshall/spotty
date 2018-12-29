@@ -12,10 +12,20 @@
 	margin-bottom: 10px;
 }
 
+.github {
+	margin: 0 auto;
+	max-width: 880px;
+	width: 50px;
+	margin-top: 5px;
+	margin-left: 20px;
+}
 
 @media only screen and (max-width: 1000px){
 	.pic {
 	  width: 100%;
+	}
+	.song {
+		width: 90%;
 	}
 	.tracks {
 		height: 300px;
