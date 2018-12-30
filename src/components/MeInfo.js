@@ -1,7 +1,8 @@
 import React from 'react';
 import {MeDiv, PlayLists, PersonalDiv, FlexDiv, ResFlex, H2Center} from './styles/meInfo_css.js'
 import axios from 'axios';
-import './styles/custom.css'
+import no_pick from './images/noimage.jpeg';
+import './styles/custom.css';
 
 class MeInfo extends React.Component {
 	constructor(){
@@ -43,7 +44,13 @@ class MeInfo extends React.Component {
 	render() {
 		let url, pic_url, total, play_url
 		if (this.props.me){
-			url = this.props.me.images[0].url
+			if (this.props.me.images){
+				if (this.props.me.images.length > 0){
+					url = this.props.me.images[0].url
+				}
+			} else {
+				url = no_pick
+			}
 			pic_url = this.props.me.external_urls.spotify
 			total = this.props.me.followers.total
 		}
