@@ -282,7 +282,7 @@ class Search extends React.Component {
   			<Flex>
   				<SearchDiv>
   					<h2>Look Up Music</h2>
-  					<form>
+  					<form onSubmit={this.lookUp}>
   						<input
   							type="text"
   							placeholder='Search'
