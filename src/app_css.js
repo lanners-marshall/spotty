@@ -13,7 +13,7 @@ export const Banner = styled.div`
 `
 export const Container = styled.div`
 	width: 94%;
-	max-width: 880px;
+	max-width: 980px;
 	margin: 0 auto;
 `
 
