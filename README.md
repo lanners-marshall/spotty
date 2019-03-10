@@ -1,6 +1,6 @@
 # Spotty
 
-Spotty is a simple React app made to let you interact with the Spotify api. With it you can easily log into your account, look up your different playlists, listen to your playlists, build new playlists while listening to different songs, and make new playlists that you can post to your Spotify account.
+Spotty is a simple React app made to lets you interact with the Spotify api. With it you can easily log into your account, look up your different playlists, listen to your playlists, build new playlists while listening to different songs, and make new playlists that you can post to your Spotify account.
 
 [Website](https://react-spotty.herokuapp.com/) 
 
