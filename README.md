@@ -2,7 +2,8 @@
 
 Spotty is a simple React app made to lets you interact with the Spotify api. With it you can easily log into your account, look up your different playlists, listen to your playlists, build new playlists while listening to different songs, and make new playlists that you can post to your Spotify account.
 
-[Website](https://react-spotty.herokuapp.com/) 
+[HEROKU](https://react-spotty.herokuapp.com/)
+[FIREBASE](https://spottty-248f3.firebaseapp.com/)
 
 
 ## Getting Started
@@ -11,7 +12,7 @@ If you want to run this on your local machine simply run clone the project, go i
 
 ## Deployment
 
-The website is deployed live on Heroku.com.
+The website is deployed live on Heroku.com and Firebase.
 
 ## Technologies Used
 
