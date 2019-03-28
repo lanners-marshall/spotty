@@ -34,7 +34,7 @@ export const PlayLists = styled.div`
 		}
 		> p {
 			width: 85%;
-			margin: 15px auto;
+			margin: 8 auto;
 		}
 	}
 `
