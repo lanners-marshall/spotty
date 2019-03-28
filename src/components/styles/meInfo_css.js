@@ -35,6 +35,8 @@ export const PlayLists = styled.div`
 		> p {
 			width: 85%;
 			margin: 8 auto;
+			justify-content: center;
+			align-items: center;
 		}
 	}
 `
