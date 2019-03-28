@@ -35,9 +35,9 @@ export const PlayLists = styled.div`
 		> p {
 			width: 85%;
 			margin: 8 auto;
-			justify-content: center;
-			align-items: center;
 		}
+		justify-content: center;
+		align-items: center;
 	}
 `
 export const ResFlex = styled.div`
