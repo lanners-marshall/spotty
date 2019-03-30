@@ -18,7 +18,7 @@ export const SearchDiv = styled.div`
   > form > input {
   	font-size: 2rem;
   	height: 30px;
-  	width: 100%;
+  	width: 92%;
   	margin: 15px 0;
   }
   > p {
